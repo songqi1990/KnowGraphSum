@@ -1,0 +1,2 @@
+# GraphSum
+Graph Summarization Project
