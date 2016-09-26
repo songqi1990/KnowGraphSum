@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.util.Vector;
 
@@ -26,4 +26,3 @@ public class AVpair {
 	}
 
 }
-

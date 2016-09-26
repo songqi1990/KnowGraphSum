@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.util.HashMap;
 import java.util.Vector;
@@ -57,5 +57,4 @@ public class gpm_node extends Object{
 		return this.tag;
 	}
 }
-
 

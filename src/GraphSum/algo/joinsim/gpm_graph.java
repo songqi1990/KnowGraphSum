@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +25,8 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
+
+import wsu.eecs.mlkd.KGQuery.algo.SPMine.SPMine_filter;
 
 public class gpm_graph extends DefaultDirectedWeightedGraph<gpm_node, gpm_edge>{
 
@@ -628,5 +630,4 @@ public class gpm_graph extends DefaultDirectedWeightedGraph<gpm_node, gpm_edge>{
 	}
 	}
 }
-
 

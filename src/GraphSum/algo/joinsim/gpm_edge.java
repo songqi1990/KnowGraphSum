@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import org.jgraph.graph.DefaultEdge;
 

@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -124,4 +124,3 @@ public class Neo4jSubGraph {
 	}
 
 }
-

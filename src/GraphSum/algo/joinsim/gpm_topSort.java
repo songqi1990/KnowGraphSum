@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,7 +9,9 @@ import java.util.Vector;
 import org.jgrapht.graph.DirectedSubgraph;
 import org.jgrapht.traverse.TopologicalOrderIterator;
 
-import GraphSum.algo.*;
+import wsu.eecs.mlkd.KGQuery.algo.joinsim.gpm_edge;
+import wsu.eecs.mlkd.KGQuery.algo.joinsim.gpm_graph;
+import wsu.eecs.mlkd.KGQuery.algo.joinsim.gpm_node;
 
 //This class performs topological sorting on 
 //a general graph -- with well-defined rankings.
@@ -92,5 +94,4 @@ public class gpm_topSort {
 	}
 
 }
-
 

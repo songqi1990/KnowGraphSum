@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.SPMine;
 
 import java.security.InvalidParameterException;
 import java.util.HashSet;

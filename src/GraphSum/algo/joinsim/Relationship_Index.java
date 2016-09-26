@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -128,4 +128,3 @@ public class Relationship_Index {
 		System.out.println("Time spend " + (st2 - st1));
 	}
 }
-

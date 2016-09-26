@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.*;
 
@@ -153,4 +153,3 @@ public class MyFileOperation {
 	}
 
 }
-

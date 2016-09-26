@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +15,7 @@ import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
-import GraphSum.algo.Neo4jGraph;
+import wsu.eecs.mlkd.KGQuery.algo.joinsim.Neo4jGraph;
 
 public class Label_Index {
 
@@ -211,4 +211,3 @@ public class Label_Index {
 		}
 	}
 }
-

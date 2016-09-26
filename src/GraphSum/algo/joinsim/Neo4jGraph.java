@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,6 +47,8 @@ public class Neo4jGraph  {// EmbeddedGraphDatabase
 	public long distQtime2 = 0;
 	public long distQtimeDM = 0;
 	public long distQtime3 = 0;
+
+	public Neo4j_distBuffer dBuff = null;
 
 	public HashMap<String, String> schema; // schema on vertex. format: attr:type
 	public Vector<String> relschema;//schema on edges: ie, colors
@@ -464,6 +466,144 @@ public class Neo4jGraph  {// EmbeddedGraphDatabase
 			 */			}
 		return -1;
 	}
+
+
+	//	This function checks the distance of two vertex with ad-hoc BFS search
+	//	utilizing bounded DijkstraShortestPath
+	// 	when start and end vertices are specified -- becomes BFS search.
+	//	============================================================================//
+	public boolean checkDistanceFromDS(int mode, boolean opt, Node a, Node b, 
+			int bound, int color, boolean inc){
+
+		long bibfs = 0;
+		long bfs = 0;
+
+		if(a.getId() == b.getId()){
+			if(this.getRelationship(a, b)!=null){
+				return true;
+			}
+			else
+				return false;
+		}
+		/*
+		//distance stored in dist buffer.
+		if(this.dBuff!=null){
+			int dist = this.dBuff.getDist(a.getId(), b.getId(), color);
+			int status = 1;
+			if(inc)
+				status = this.dBuff.getstatus(a.getId(), b.getId(), color);
+			if(dist!=-1 && status==1){
+				if(dist<=bound)
+					return true;
+				return false;
+			}
+		}
+
+		if(this.dBuff==null){
+			this.dBuff = new gpm_distBuffer(gfilename);
+		}
+
+		 */
+
+		long start1 = System.nanoTime();
+
+		HashSet<Node> neighbors1 = new HashSet<Node>();
+		HashSet<Node> neighbors2 = new HashSet<Node>();
+		HashSet<Node> S3 = new HashSet<Node>();
+
+		Vector<Node> visited1 = new Vector<Node>();
+		Vector<Node> visited2 = new Vector<Node>();
+		Vector<Node> newnodes1 = new Vector<Node>();
+		Vector<Node> newnodes2 = new Vector<Node>();
+		neighbors1.add(a);
+		neighbors2.add(b);
+		visited1.add(a);
+		visited2.add(b);
+		newnodes1.add(a);
+		newnodes2.add(b);
+
+		short distn1 = 0;
+		short distn2 = 0;
+		boolean s1change = true;
+		boolean s2change = true;
+		boolean isr = false;
+		//		HashSet<Node> cset = new HashSet<Node>();
+
+		short i = 0;
+		for(i=0;i<Math.min(bound, this.getNodeNumber()); i++){
+
+			//if s1 smaller than s2 extend s1
+			if(visited1.size()<=visited2.size() && s1change ){
+				s1change = true;
+				neighbors1.clear();
+				for(Node as: newnodes1){
+					neighbors1.addAll(this.GetChildren(as, color));
+				}
+				neighbors1.removeAll(visited1);
+				if(neighbors1.size()==0){
+					s1change = false;
+				}
+				distn1++;
+				if(opt){
+					for(Node as:neighbors1){	
+						dBuff.insertDist(0, a.getId(), as.getId(), distn1, color, inc);
+					}
+				}
+				visited1.addAll(neighbors1);
+				newnodes1.clear();
+				newnodes1.addAll(neighbors1);
+			}
+
+			//if s1 larger than s2 extend s2.
+			else if(visited2.size()<visited1.size() && s1change && s2change){
+				s2change = true;
+				neighbors2.clear();
+				for(Node bs: newnodes2){
+					neighbors2.addAll(this.GetParents(bs, false, color));
+				}
+				neighbors2.removeAll(visited2);
+				if(neighbors2.size()==0){
+					s2change = false;
+				}
+				distn2++;
+				if(opt){
+					for(Node bs:neighbors2){
+						dBuff.insertDist(0, bs.getId(), b.getId(), distn2, color, inc);
+					}
+				}
+				visited2.addAll(neighbors2);
+				newnodes2.clear();
+				newnodes2.addAll(neighbors2);
+			}
+
+			S3.clear();
+			S3.addAll(visited1);
+			S3.retainAll(visited2);
+			if(S3.size()>0){
+				dBuff.insertDist(0, a.getId(), b.getId(), (short)(i+1), color, inc);
+				isr =  true;
+				break;
+			}
+			else if((!s1change)|| (s1change && !s2change) ){ //&& !s2change //
+				isr =  false;
+				break;
+			}
+		}
+
+		bibfs = System.nanoTime() - start1;
+		distQtime += bibfs;
+
+		start1 = System.nanoTime();
+
+		if(i>=this.getNodeNumber()-1){
+			dBuff.insertDist(0, a.getId(), b.getId(), Short.MAX_VALUE, color, inc);
+		}
+
+
+		//using BFS search
+		return isr;
+	}
+	//	}
 
 
 	//	=====================================================================//
@@ -1093,4 +1233,3 @@ public class Neo4jGraph  {// EmbeddedGraphDatabase
 		return res;
 	}
 }
-

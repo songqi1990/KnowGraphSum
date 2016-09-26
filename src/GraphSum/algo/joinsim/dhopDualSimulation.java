@@ -1,4 +1,4 @@
-package GraphSum.algo;
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -180,7 +180,7 @@ public class dhopDualSimulation {
 		{				
 			Label_Index l = new Label_Index(dg);
 			l.buildLabelIndex(false);
-			dhopDualSimulation ddsim = new dhopDualSimulation(pg, dg,l,1);
+			dhopDualSimulation ddsim = new dhopDualSimulation(pg, dg,l,3);
 			System.out.println(ddsim.IsDDSim(mode));
 			tx1.success();
 		}

@@ -1,5 +1,4 @@
-package GraphSum.algo;
-
+package wsu.eecs.mlkd.KGQuery.algo.joinsim;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +9,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Vector;
+
+import wsu.eecs.mlkd.KGQuery.algo.joinsim.Neo4jGraph;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
@@ -206,4 +207,3 @@ public class Property_Index {
 		System.out.println("Time spend " + (st2 - st1));
 	}
 }
-
